@@ -42,8 +42,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceTestFilePaths.resx</DependentUpon>
     </Compile>
-    <Compile Include="UnitTests.cs" />
+    <Compile Include="Suite2UnitTests.cs" />
+    <Compile Include="Suite1UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestCaseBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

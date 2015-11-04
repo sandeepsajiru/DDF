@@ -6,7 +6,7 @@ using DataDrivenFramework;
 namespace TestAutomation
 {
     [TestFixture]
-    public class UnitTests
+    public class Suite1UnitTests : TestCaseBase
     {
         [Test]
         public void SuiteSelectionTest()
@@ -32,6 +32,30 @@ namespace TestAutomation
             foreach (var dict in tdList)
             {
                 Console.WriteLine("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
+            }
+
+        }
+
+       
+
+        [Test, TestCaseSource("Test1Data")]
+        public void DataDrivenTest1(Dictionary<String, String> dict)
+        {
+            ValidateRunMode("SuiteA", "Test1", dict["Runmode"]);
+            Console.WriteLine("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
+
+        }
+
+
+        // DATA SOURCE
+        IEnumerable<Dictionary<String, String>> Test1Data()
+        {
+            List<Dictionary<String, String>> tdList = SelectionHelper.GetTestData(
+                ResourceTestFilePaths.SuiteAExcelFilePath, "Test1");
+
+            foreach (var dict  in tdList)
+            {
+                yield return dict;
             }
 
         }
