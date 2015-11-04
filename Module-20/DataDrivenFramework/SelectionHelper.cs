@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,5 +31,37 @@ namespace DataDrivenFramework
                 return true;
             return false;
         }
+
+        public static List<Dictionary<String, String>> GetTestData(String suiteFilePath, String testCaseName)
+        {
+            List<Dictionary<String, String>> listOfData = new List<Dictionary<string, string>>();
+
+            ExcelHelper eh = new ExcelHelper(suiteFilePath);
+
+            // Find Row Number for testCaseName - by searching it in first Column
+            int testRowNumber = eh.GetRowNumber("Data", 1, testCaseName);
+
+            int colHeadersRowNumber = testRowNumber + 1;
+
+            int testDataRowId = colHeadersRowNumber + 1;
+            int endRowId = testDataRowId;
+            while (!eh.GetCellData("Data", 1, endRowId).Equals(""))
+                endRowId++;
+
+            for (int i = testDataRowId; i < endRowId; i++)
+            {
+                Dictionary<String, String> data = new Dictionary<string, string>();
+                int colId = 1;
+                while (!eh.GetCellData("Data", colId, colHeadersRowNumber).Equals(""))
+                {
+                    data.Add(eh.GetCellData("Data", colId, colHeadersRowNumber), eh.GetCellData("Data", colId, i));
+                    colId++;
+                }
+
+                listOfData.Add(data);
+            }
+
+            return listOfData;
+        } 
     }
 }
