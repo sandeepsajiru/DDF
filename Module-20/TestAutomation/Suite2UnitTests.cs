@@ -9,6 +9,7 @@ using NUnit.Framework;
 namespace TestAutomation
 {
 
+    [Parallelizable(ParallelScope.Self)]
     [TestFixture]
     class Suite2UnitTests : TestCaseBase
     {
@@ -21,7 +22,7 @@ namespace TestAutomation
         }
 
         // DATA SOURCE
-        IEnumerable<Dictionary<String, String>> Test4Data()
+        public static IEnumerable<Dictionary<String, String>> Test4Data()
         {
             List<Dictionary<String, String>> tdList = SelectionHelper.GetTestData(
                 ResourceTestFilePaths.SuiteAExcelFilePath, "Test4");

@@ -8,7 +8,7 @@ using NUnit.Framework;
 using log4net;
 using log4net.Config;
 
-
+[assembly: LevelOfParallelism(4)]
 
 [SetUpFixture]
 public class TestSuiteSetup
@@ -16,7 +16,7 @@ public class TestSuiteSetup
     //http://nunit.org/index.php?p=setupFixture&r=2.6.3
     // Only one SetUpFixture should be created in a given namespace. A SetUpFixture outside of any namespace provides SetUp and TearDown for the entire assembly.
     
-    [SetUp]
+    [OneTimeSetUp]
     public void InitLogger()
     {
         XmlConfigurator.Configure();

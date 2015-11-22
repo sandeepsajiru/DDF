@@ -6,6 +6,7 @@ using DataDrivenFramework;
 namespace TestAutomation
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.Self)]
     public class Suite1UnitTests : TestCaseBase
     {
         [Test]
@@ -48,7 +49,7 @@ namespace TestAutomation
 
 
         // DATA SOURCE
-        IEnumerable<Dictionary<String, String>> Test1Data()
+        public static IEnumerable<Dictionary<String, String>> Test1Data()
         {
             List<Dictionary<String, String>> tdList = SelectionHelper.GetTestData(
                 ResourceTestFilePaths.SuiteAExcelFilePath, "Test1");
