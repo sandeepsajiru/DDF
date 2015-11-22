@@ -11,17 +11,17 @@ namespace TestAutomation
         [Test]
         public void SuiteSelectionTest()
         {
-            Console.WriteLine(SelectionHelper.IsSuiteSelected(ResourceTestFilePaths.SuitesExcelFilePath, "SuiteA"));
-            Console.WriteLine(SelectionHelper.IsSuiteSelected(ResourceTestFilePaths.SuitesExcelFilePath, "SuiteB"));
-            Console.WriteLine(SelectionHelper.IsSuiteSelected(ResourceTestFilePaths.SuitesExcelFilePath, "SuiteC"));
+            APP_LOGGER.Info(SelectionHelper.IsSuiteSelected(ResourceTestFilePaths.SuitesExcelFilePath, "SuiteA"));
+            APP_LOGGER.Info(SelectionHelper.IsSuiteSelected(ResourceTestFilePaths.SuitesExcelFilePath, "SuiteB"));
+            APP_LOGGER.Info(SelectionHelper.IsSuiteSelected(ResourceTestFilePaths.SuitesExcelFilePath, "SuiteC"));
         }
 
         [Test]
         public void TestSelectionTest()
         {
-            Console.WriteLine(SelectionHelper.IsTestSelected(ResourceTestFilePaths.SuiteAExcelFilePath, "Test1"));
-            Console.WriteLine(SelectionHelper.IsTestSelected(ResourceTestFilePaths.SuiteAExcelFilePath, "Test2"));
-            Console.WriteLine(SelectionHelper.IsTestSelected(ResourceTestFilePaths.SuiteAExcelFilePath, "Test3"));
+            APP_LOGGER.Debug(SelectionHelper.IsTestSelected(ResourceTestFilePaths.SuiteAExcelFilePath, "Test1"));
+            APP_LOGGER.Debug(SelectionHelper.IsTestSelected(ResourceTestFilePaths.SuiteAExcelFilePath, "Test2"));
+            APP_LOGGER.Debug(SelectionHelper.IsTestSelected(ResourceTestFilePaths.SuiteAExcelFilePath, "Test3"));
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace TestAutomation
 
             foreach (var dict in tdList)
             {
-                Console.WriteLine("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
+                APP_LOGGER.DebugFormat("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
             }
 
         }
@@ -42,7 +42,7 @@ namespace TestAutomation
         public void DataDrivenTest1(Dictionary<String, String> dict)
         {
             ValidateRunMode("SuiteA", "Test1", dict["Runmode"]);
-            Console.WriteLine("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
+            APP_LOGGER.DebugFormat("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
 
         }
 

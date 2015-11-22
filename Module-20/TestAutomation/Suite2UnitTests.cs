@@ -16,7 +16,7 @@ namespace TestAutomation
         public void DataDrivenTest4(Dictionary<String, String> dict)
         {
             ValidateRunMode("SuiteB", "Test4", dict["Runmode"]);
-            Console.WriteLine("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
+            APP_LOGGER.DebugFormat("RunMode: {0}, Col1: {1}", dict["Runmode"], dict["Col1"]);
 
         }
 
