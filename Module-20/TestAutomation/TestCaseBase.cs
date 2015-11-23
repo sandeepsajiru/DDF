@@ -7,6 +7,12 @@ using DataDrivenFramework;
 using NUnit.Framework;
 using log4net;
 using log4net.Config;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Safari;
+using System.Threading;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 
 [assembly: LevelOfParallelism(4)]
 
@@ -41,6 +47,49 @@ namespace TestAutomation
             if (!(isSuiteSelected && isTestSelected && isDataSelected))
                 Assert.Ignore(String.Format("Skipping Test - SuiteRunMode: {0}, TestRunMode: {1}, DataRunMode: {2}",
                     isSuiteSelected, isTestSelected, isDataSelected));
+        }
+
+        protected void RunTest(String browserType, String url)
+        {
+            APP_LOGGER.Debug("Running Test With " + browserType + " on URL " + url);
+
+            // Open Browser
+            IWebDriver wd ;
+
+            if (browserType.Equals("firefox"))
+                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.Firefox());
+            else if (browserType.Equals("safari"))
+                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.Safari());
+            else if(browserType.Equals("chrome"))
+                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.Chrome());
+            else
+                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.InternetExplorer());
+
+            // Go to Google.com
+            wd.Url = url;
+
+            Random rnd = new Random();
+            int randomSeconds = rnd.Next(1, 11);
+            
+            // Wait for Random Time (1s to 10 s)
+            APP_LOGGER.DebugFormat("Waiting for {0} seconds Before Exiting Browser", randomSeconds);
+            Thread.Sleep(TimeSpan.FromSeconds(randomSeconds));
+
+            // Quit Browser
+            wd.Quit();
+        }
+
+
+        // DATA SOURCE
+        public static IEnumerable<String> BrowserData()
+        {
+            String[] browsers = { "safari", "chrome", "firefox"};
+
+            foreach (var b in browsers)
+            {
+                yield return b;
+            }
+
         }
     }
 }

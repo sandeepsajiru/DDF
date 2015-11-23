@@ -15,24 +15,10 @@ namespace TestAutomation
     [Parallelizable(ParallelScope.Self)]
     class MicrosoftSeleniumTest : TestCaseBase
     {
-        [Test]
-        public void MicrosoftTest()
+        [Test, TestCaseSource(typeof(TestCaseBase), "BrowserData")]
+        public void MicrosoftTest(String browser)
         {
-            // Open Browser
-            IWebDriver wd = new InternetExplorerDriver();
-
-            // Go to Google.com
-            wd.Url = "http://microsoft.com";
-
-            Random rnd = new Random();
-            int randomSeconds = rnd.Next(1, 11);
-            
-            // Wait for Random Time (1s to 10 s)
-            APP_LOGGER.DebugFormat("Waiting for {0} seconds Before Exiting Browser", randomSeconds);
-            Thread.Sleep(TimeSpan.FromSeconds(randomSeconds));
-
-            // Quit Browser
-            wd.Quit();
+            RunTest(browser, "http://microsoft.com");
         }
 
     }

@@ -45,7 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InernetExplorerDriver.cs" />
+    <Compile Include="AppleTest.cs" />
     <Compile Include="ResourceTestFilePaths.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
