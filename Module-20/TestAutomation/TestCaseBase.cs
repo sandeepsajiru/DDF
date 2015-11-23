@@ -57,13 +57,13 @@ namespace TestAutomation
             IWebDriver wd ;
 
             if (browserType.Equals("firefox"))
-                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.Firefox());
+                wd = new RemoteWebDriver(new Uri(ResourceTestFilePaths.GridHubURL), DesiredCapabilities.Firefox());
             else if (browserType.Equals("safari"))
-                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.Safari());
+                wd = new RemoteWebDriver(new Uri(ResourceTestFilePaths.GridHubURL), DesiredCapabilities.Safari());
             else if(browserType.Equals("chrome"))
-                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.Chrome());
+                wd = new RemoteWebDriver(new Uri(ResourceTestFilePaths.GridHubURL), DesiredCapabilities.Chrome());
             else
-                wd = new RemoteWebDriver(new Uri("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.InternetExplorer());
+                wd = new RemoteWebDriver(new Uri(ResourceTestFilePaths.GridHubURL), DesiredCapabilities.InternetExplorer());
 
             // Go to Google.com
             wd.Url = url;
@@ -83,7 +83,7 @@ namespace TestAutomation
         // DATA SOURCE
         public static IEnumerable<String> BrowserData()
         {
-            String[] browsers = { "safari", "chrome", "firefox"};
+            String[] browsers = ResourceTestFilePaths.BrowserToRunWith.Split(new char[] { ',' });
 
             foreach (var b in browsers)
             {

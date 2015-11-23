@@ -14,11 +14,11 @@ namespace TestAutomation
     [TestFixture]
     class OracleSeleniumTest : TestCaseBase
     {
-        [Test]
-        public void OracleTest()
-        {
-            RunTest("firefox", "http://oracle.com");   
-        }
 
+        [Test, TestCaseSource(typeof(TestCaseBase), "BrowserData")]
+        public void OracleTest(String browserName)
+        {
+            RunTest(browserName, "http://oracle.com");
+        }
     }
 }

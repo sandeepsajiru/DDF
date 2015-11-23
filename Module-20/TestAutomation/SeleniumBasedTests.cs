@@ -15,10 +15,10 @@ namespace TestAutomation
     [Parallelizable(ParallelScope.Self)]
     class SeleniumBasedTests : TestCaseBase
     {
-        [Test]
-        public void GoogleTest()
+        [Test, TestCaseSource(typeof(TestCaseBase), "BrowserData")]
+        public void GoogleTest(String browserName)
         {
-            RunTest("firefox", "http://google.com");
+            RunTest(browserName, "http://google.com");
         }
 
     }
