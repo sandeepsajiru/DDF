@@ -14,7 +14,7 @@ namespace DataDrivenFramework
     {
         public static bool IsTestSelected(String suiteFilePath, String testName)
         {
-            ExcelHelper eh = new ExcelHelper(suiteFilePath);
+            ExcelHelper eh = new ExcelHelper(GetAbsolutePathOfDataFile(suiteFilePath));
             int testCaseRowNumber = eh.GetRowNumber("TestCases", "TestCases", testName);
             String runModeValue = eh.GetCellData("TestCases", "Runmode", testCaseRowNumber);
 
@@ -24,7 +24,7 @@ namespace DataDrivenFramework
         }
         public static bool IsSuiteSelected(String suitesFilePath, String suiteName)
         {
-            ExcelHelper eh  = new ExcelHelper(suitesFilePath);
+            ExcelHelper eh = new ExcelHelper(GetAbsolutePathOfDataFile(suitesFilePath));
             int suiteRowNumber = eh.GetRowNumber("Suite", "SuiteName", suiteName);
             String runModeValue = eh.GetCellData("Suite", "Runmode", suiteRowNumber);
 
@@ -34,13 +34,17 @@ namespace DataDrivenFramework
             return false;
         }
 
+        public static String GetAbsolutePathOfDataFile(String relativeFilePath)
+        {
+            String pathOfExecutingAssmebly = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return Path.Combine(pathOfExecutingAssmebly, relativeFilePath);
+        }
+
         public static List<Dictionary<String, String>> GetTestData(String suiteFilePath, String testCaseName)
         {
             List<Dictionary<String, String>> listOfData = new List<Dictionary<string, string>>();
 
-            String pathOfExecutingAssmebly = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-            ExcelHelper eh = new ExcelHelper(Path.Combine(pathOfExecutingAssmebly, suiteFilePath));
+            ExcelHelper eh = new ExcelHelper(GetAbsolutePathOfDataFile(suiteFilePath));
 
             // Find Row Number for testCaseName - by searching it in first Column
             int testRowNumber = eh.GetRowNumber("Data", 1, testCaseName);
