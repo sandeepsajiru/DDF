@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BrowserToRunWith" xml:space="preserve">
-    <value>firefox</value>
+    <value>firefox,chrome,safari</value>
   </data>
   <data name="GridHubURL" xml:space="preserve">
     <value>http://127.0.0.1:4444/wd/hub</value>

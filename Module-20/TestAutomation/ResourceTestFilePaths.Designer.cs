@@ -61,7 +61,7 @@ namespace TestAutomation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to firefox.
+        ///   Looks up a localized string similar to firefox,chrome,safari.
         /// </summary>
         internal static string BrowserToRunWith {
             get {
