@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DatadrivenFramework;
+using System.Reflection;
+using System.IO;
 
 namespace DataDrivenFramework
 {
@@ -36,7 +38,9 @@ namespace DataDrivenFramework
         {
             List<Dictionary<String, String>> listOfData = new List<Dictionary<string, string>>();
 
-            ExcelHelper eh = new ExcelHelper(suiteFilePath);
+            String pathOfExecutingAssmebly = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            ExcelHelper eh = new ExcelHelper(Path.Combine(pathOfExecutingAssmebly, suiteFilePath));
 
             // Find Row Number for testCaseName - by searching it in first Column
             int testRowNumber = eh.GetRowNumber("Data", 1, testCaseName);
